@@ -1,0 +1,17 @@
+.dice{
+    width: 36px;
+    height: 36px;
+    background-color: #FFF;
+    color: #2B283A;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.lock {
+    background-color: #59E391;
+  }
