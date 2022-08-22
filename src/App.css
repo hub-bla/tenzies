@@ -25,7 +25,6 @@
 }
 
 .dices{
-  margin-top: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
@@ -49,6 +48,16 @@
   border-radius: 5px;
   font-size: 16px;
   margin-top: 20px;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.roll:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.roll:active{
+  box-shadow: none;
+  background-color: #736eff;
 }
 
 .start{

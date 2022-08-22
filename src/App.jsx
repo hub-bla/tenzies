@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Conf from './components/Conf'
 import Dice from './components/Dice'
 
 function App() {
-
-  const [dicesData, setDicesData] = useState([])
+  const [dicesData, setDicesData] = useState(Start())
   const [isOver, setIsOver] = useState(false)
+  const [rollCounter, setRollCounter] = useState(0)
 
 
   function getRandomNumber(){
-    return Math.round((Math.random()*5)+1)
+    return Math.ceil(Math.random()*6)
   }
 
 
@@ -18,7 +19,6 @@ function App() {
       return dice.number === dicesData[0].number && dice.isClicked
     }))
   }, [dicesData])
-  
 
   function Start(){
     const newDices = []
@@ -30,16 +30,17 @@ function App() {
         number: getRandomNumber()
       }
     }
-    setDicesData(newDices)
+    return newDices
   }
 
 
-  useEffect(() => {
-    Start()
-  }, [])
+  function newGame(){
+    setDicesData(Start())
+  }
 
-
+  
   function getDices(){
+    setRollCounter(prevRollCounter => prevRollCounter + 1)
     setDicesData(dicesData.map(dice => {
         const {isClicked, number} = dice
         
@@ -49,6 +50,8 @@ function App() {
         }
     }))
   }
+  
+  
 
   function lockDice(id){
     setDicesData(prevDicesData => {
@@ -62,7 +65,6 @@ function App() {
       return updatedDices
     })
   }
-
 
   const dices = dicesData.map(dice => {
     return <Dice 
@@ -84,8 +86,11 @@ function App() {
       </p>
       {isOver ? 
       <div className='game'>
+
+        <Conf />
         <div className='end'>You won!</div>
-        <button className='roll' onClick={Start}>Roll again</button>
+        <div className='end'>You rolled {rollCounter} times</div>
+        <button className='roll' onClick={() => { newGame(); setRollCounter(0)}}>Roll again</button>
       </div>
       
       :
